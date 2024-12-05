@@ -1,7 +1,30 @@
+# Text generation CFG improvements
+
+Details are presented in the Section 5 of the article: https://github.com/RGSmirnov/cfg_safety_llm/blob/main/paper.pdf
+
+<br>To update the CFG to use Softmax instead of LogSoftmax the following code should be inserted near the model initialization (e.g. `model_eval.py`)
+```python
+from transformers.generation.logits_process import UnbatchedClassifierFreeGuidanceLogitsProcessor
+
+def modified_call(self, input_ids, scores):
+    #print(1/0)
+    scores = torch.nn.functional.softmax(scores, dim=-1)
+    if self.guidance_scale == 1:
+        return scores
+
+    logits = self.get_unconditional_logits(input_ids)
+
+    unconditional_logits = torch.nn.functional.softmax(logits[:, -1], dim=-1)
+    scores_processed = self.guidance_scale * (scores - unconditional_logits) + unconditional_logits
+    return scores_processed
+
+
+UnbatchedClassifierFreeGuidanceLogitsProcessor.__call__ = modified_call
+```
 
 # NeurIPS 2024 LLM-PC Submission - Blue Team
 
-Code for the submitted article.
+Code for the submitted article: https://github.com/RGSmirnov/cfg_safety_llm/blob/main/paper.pdf
 
 <br>There are three parts:
 <ul>
