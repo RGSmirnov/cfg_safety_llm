@@ -1,11 +1,13 @@
 
 # NeurIPS 2024 LLM-PC Submission - Blue Team
 
-Code for the submitted article.<br>There are three parts:
+Code for the submitted article.
+
+<br>There are three parts:
 <ul>
-<li> Data generation. Data generation has its own `data_gen_requirements.txt`. The code for data generation is in `prepare_dataset.py`. Using tree functions in the script we can get the ORPO-style datasets for CFG and no-CFG training from the original data provided in the Challenge. The code is messy (it was a bunch of notebooks initially), but should work. The resulting datasets for training are presented in the separate files with the names: `orpo_train.jsonl`, `orpo_train_nocfg.jsonl`, `orpo_test.jsonl` and `orpo_test_nocfg.jsonl`</li>
-<li> Training. Training has `requirements.txt` that are required for both training and inference / evaluation. Training is based on ORPO and the training script is `train_orpo.py`, where training hyperparameters are also defined.</li>
-<li> Evaluation. Evaluation has `requirements.txt` that are required for both training and inference / evaluation. There is a separate section in ReadMe for evaluation and inference.</li>
+<li> Data generation (I am not sharing the data generation code here - didn't clean it enough to share, but it should be pretty simple to reproduce). The resulting files for training: `orpo_train.jsonl`, `orpo_train_nocfg.jsonl`, `orpo_test.jsonl` and `orpo_test_nocfg.jsonl`</li>
+<li> Training. Training is based on ORPO and the training script is `train_orpo.py`, where baseline training hyperparameters are also defined. Additional ablations are welcommed here</li>
+<li> Evaluation. There is a separate section in ReadMe for evaluation and inference.</li>
 </ul>
 
 Also it is required to install SpaCy model for NER
@@ -14,15 +16,13 @@ Also it is required to install SpaCy model for NER
 python -m spacy download en_core_web_trf
 ```
 
-Additionally there is a script for model merging with an example of how it was run inside - `subtrack_models.py`.
-
 
 Links to the checkpoints of some of the models (checkpoints are saved in a form of LoRA adapters and can be downloaded from the following link):
 <br> https://drive.google.com/drive/folders/1GVITe6UbLT_puTPM2B2BaLA6oAMpVv2a?usp=sharing 
 <br>In the folder there are 4 archives: `out_llama_orpo` with each epoch checkpoints of Model-sub-lora-cfg; `out_llama_orpo_nocfg` with each epoch checkpoints of Model-sub-lora; `out_llama_orpo_comp` with each epoch checkpoints of Model-ch-lora-cfg; `out_llama_orpo_comp_nocfg` with each epoch checkpoints of Model-sub-lora; 
 
 
-<br> To run data generation or evaluation OpenAI API key and Together.ai API key are required to be set as environment variables `OPENAI_API_KEY` and `TOGETHER_API_KEY` or just inserted in the scripts (for data generation and to MMLU evaluation with the GPT-Judge approach).
+<br> To run evaluation OpenAI API key is required to be set as environment variables `OPENAI_API_KEY` or just inserted in the scripts (for MMLU evaluation with the LLM judge approach).
 
 # Evaluation
 
