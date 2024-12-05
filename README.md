@@ -21,6 +21,8 @@ def modified_call(self, input_ids, scores):
 UnbatchedClassifierFreeGuidanceLogitsProcessor.__call__ = modified_call
 ```
 
+MMLU and PII answers with the updated CFG function are presented in `mmlu_answers_sftmaxCFG_cfg_3.jsonl` and `mmlu_answers_third_epoch_cfg3_from_competition.jsonl`
+
 # NeurIPS 2024 LLM-PC Submission - Blue Team
 
 Code for the submitted article: https://github.com/RGSmirnov/cfg_safety_llm/blob/main/paper.pdf
