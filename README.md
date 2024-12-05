@@ -7,7 +7,6 @@ Details are presented in the Section 5 of the article: https://github.com/RGSmir
 from transformers.generation.logits_process import UnbatchedClassifierFreeGuidanceLogitsProcessor
 
 def modified_call(self, input_ids, scores):
-    #print(1/0)
     scores = torch.nn.functional.softmax(scores, dim=-1)
     if self.guidance_scale == 1:
         return scores
