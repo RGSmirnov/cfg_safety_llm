@@ -1,6 +1,6 @@
 # Text generation CFG improvements
 
-Details are presented in the Section 5 of the article: https://github.com/RGSmirnov/cfg_safety_llm/blob/main/paper.pdf
+(This is the post-competition update) Details are presented in the Section 5 of the article: https://github.com/RGSmirnov/cfg_safety_llm/blob/main/paper.pdf
 
 <br>To update the CFG to use Softmax instead of LogSoftmax the following code should be inserted near the model initialization (e.g. `model_eval.py`)
 ```python
