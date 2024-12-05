@@ -46,7 +46,7 @@ def get_cosine_schedule_with_warmup(
 
 def _get_cosine_schedule_with_warmup_lr_lambda(
     current_step: int, *, num_warmup_steps: int, num_training_steps: int, num_cycles: float,
-    #modificated
+    # is set in get_cosine_schedule_with_warmup as default to 0.9
     max_lr_decrease_percentage: float
 ):
     if current_step < num_warmup_steps:
